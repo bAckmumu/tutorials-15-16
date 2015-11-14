@@ -79,25 +79,13 @@ $errorMessage = "";
 if(isset($_POST['submit'])){
     
     // TODO: sanitize the input (prevent sql injections);
-    //if (empty($_POST["firstname"])) {
-    //    $errorMessage = pushToErrorMessage("Artist is required");
-    //    return;
-    //} else {
-        $artist = testInput($_POST["artist"]);
-    //}
-    
-    //if (empty($_POST["firstname"])) {
-    //    $errorMessage = pushToErrorMessage("Title is required");
-    //    return;
-    //} else {
-        $title = testInput($_POST["title"]); 
-    //}
-    
+    $artist = testInput($_POST["artist"]);
+    $title = testInput($_POST["title"]); 
+        
     // TODO: Insert the data.
+    // TODO: Inform the user. If there was an error, show a notification. If it succeeded inform the user, too.
     if ( $dbHandler->insertAlbum($artist, $title) ) {
- 
-        // TODO: Inform the user. If there was an error, show a notification. If it succeeded inform the user, too.
-        pushToErrorMessage($errorMessage, "Artist is required");
+        pushToErrorMessage($errorMessage, "New entry created in the data base.");
     }
     else {
         pushToErrorMessage($errorMessage, "Sorry the programm was not able to create a new entry in the data base.");
@@ -124,10 +112,17 @@ if(isset($_POST['submit'])){
         echo '<tr class="notification"><td colspan="3">There are no albums yet. You can enter the artist and album title below, then click save.</td></tr>';
     }
     else{
-
         // TODO loop through the $albums array (two-dimensional!)
-        // TODO create table rows for the first level of the array (albums)
-        // TODO create table cells for all the entries
+        foreach ($albums as $album) {
+            // TODO create table rows for the first level of the array (albums)
+            echo '<tr>';
+            // TODO create table cells for all the entries
+            foreach ($album as $value) {
+                echo '<td>'. $value .'</td>';
+            }
+
+            echo '</tr>';   
+        }
     }
     ?>
     </tbody>
