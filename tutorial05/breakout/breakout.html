@@ -61,7 +61,46 @@
 
 
 <script>
-    // TODO your code goes here.
+// TODO your code goes here.
+$(document).ready(function(){
+    
+
+    var dict = [
+        "We're no strangers to love",
+        "You know the rules and so do I",
+        "A full commitment's what I'm thinking of",
+        "You wouldn't get this from any other guy",
+        "I just wanna tell you how I'm feeling",
+        "Gotta make you understand",
+        "Never gonna give you up",
+        "Never gonna let you down",
+        "Never gonna run around and desert you",
+        "Never gonna make you cry",
+        "Never gonna say goodbye",
+        "Never gonna tell a lie and hurt you"
+    ];
+    
+    var buttonTexts = ["Run" ,"Around", "And", "Desert"];
+    var elemsToAppend=$()
+
+    $.each( buttonTexts, function(index,value){
+        elemsToAppend = elemsToAppend.add(
+        $('<li><button>'+ value +'</button></li>')
+    )
+    }); 
+    $(".rickRoll").append(elemsToAppend);
+
+    $("button").addClass("rick");
+
+    $(".rick").click(function(event){
+        event.preventDefault();
+        
+        $("#lyrics").append( "<li>"+ dict.shift() +"</li>" );
+    });  
+});
 </script>
 </body>
 </html>
+
+
+
